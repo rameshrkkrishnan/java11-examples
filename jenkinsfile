@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        stage ('checkout') {
+            steps {
+                git 'https://github.com/rameshrkkrishnan/java11-examples.git'
+            }
+        }
+        stage ('packaging') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage ('archiving') {
+            steps {
+                archiveArtifacts 'target/*.jar' 
+            }
+        }
+    }
+}
